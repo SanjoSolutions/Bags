@@ -2,4 +2,5 @@
 ## Interface: 11403
 ## Dependencies: Compatibility, Set
 
+libs/Library/Library.lua
 Bags.lua
