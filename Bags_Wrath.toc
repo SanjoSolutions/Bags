@@ -2,5 +2,4 @@
 ## Interface: 30400
 ## Dependencies: Compatibility, Set
 
-libs/Library/Library.lua
 Bags.lua
