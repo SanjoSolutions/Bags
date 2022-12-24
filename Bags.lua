@@ -48,3 +48,19 @@ function Bags.hasItem(itemID)
 
   return false
 end
+
+function Bags.determineNumberOfFreeSlots()
+  local numberOfFreeSlots = 0
+  for containerIndex = 0, NUM_BAG_SLOTS do
+    numberOfFreeSlots = numberOfFreeSlots + Compatibility.Container.receiveNumberOfFreeSlotsInContainer(containerIndex)
+  end
+  return numberOfFreeSlots
+end
+
+function Bags.areBagsFull()
+  return Bags.determineNumberOfFreeSlots() == 0
+end
+
+function Bags.hasFreeSpace()
+  return Bags.determineNumberOfFreeSlots() >= 1
+end
