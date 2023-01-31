@@ -1,5 +1,5 @@
 ## Title: Bags
-## Interface: 100002
+## Interface: 100005
 ## Dependencies: Compatibility, Set
 
 Bags.lua
