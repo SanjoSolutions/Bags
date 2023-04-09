@@ -1,5 +1,6 @@
 ## Title: Bags
 ## Interface: 11403
 ## Dependencies: Compatibility, Set
+## Version: 1.0.0
 
 Bags.lua
