@@ -3,6 +3,6 @@
   "dependencies": {
     "@sanjo-addons/library": "SanjoSolutions/LuaLibrary#v0.4.0",
     "@sanjo-addons/compatibility": "SanjoSolutions/LuaCompatibility#v2.0.0",
-    "@sanjo-addons/set": "SanjoSolutions/LuaSet#v2.0.0",
+    "@sanjo-addons/set": "SanjoSolutions/LuaSet#v2.0.0"
   }
 }
