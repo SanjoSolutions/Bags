@@ -1,8 +1,8 @@
 {
-  "name": "Bags",
+  "name": "@sanjo-addons/bags",
   "dependencies": {
-    "Library": "SanjoSolutions/LuaLibrary#v0.4.0",
-    "Compatibility": "SanjoSolutions/LuaCompatibility#v2.0.0",
-    "Set": "SanjoSolutions/LuaSet#v2.0.0",
+    "@sanjo-addons/library": "SanjoSolutions/LuaLibrary#v0.4.0",
+    "@sanjo-addons/compatibility": "SanjoSolutions/LuaCompatibility#v2.0.0",
+    "@sanjo-addons/set": "SanjoSolutions/LuaSet#v2.0.0",
   }
 }

@@ -4,7 +4,7 @@ local version = '2.0.0'
 if _G.Library then
   if not Library.isRegistered(addOnName, version) then
     local Compatibility = Library.retrieve('Compatibility', '^2.0.0')
-    local Set = Library.retrieve('Set', '^2.0.0')
+    local Set = Library.retrieve('Set', '^1.1.0')
 
     --- @class Bags
     local Bags = {}
@@ -77,5 +77,5 @@ if _G.Library then
     Library.register(addOnName, version, Bags)
   end
 else
-  error(addOnName + ' requires Library. It seems absent.')
+  error(addOnName .. ' requires Library. It seems absent.')
 end
