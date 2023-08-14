@@ -1,6 +1,0 @@
-- path: libs/Compatibility
-  url: https://github.com/SanjoSolutions/LuaCompatibility.git
-  tag: v1.0.0
-- path: libs/Set
-  url: https://github.com/SanjoSolutions/LuaSet.git
-  tag: v1.0.0
