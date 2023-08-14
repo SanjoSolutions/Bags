@@ -1,6 +1,6 @@
 ## Title: Bags
 ## Interface: 30400
-## Dependencies: Compatibility, Set
+## Dependencies: Library, Compatibility, Set
 ## Version: 1.0.0
 
 Bags.lua
