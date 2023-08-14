@@ -10,3 +10,7 @@ A library of functions for bags related things that can help other add-on creato
 * **Bags.determineNumberOfFreeSlots**: a function which determines the number of free slots.
 * **Bags.areBagsFull**: a function which checks if all bags are full.
 * **Bags.hasFreeSpace**: a function which checks if there is any free space.
+
+## How to use
+
+Please see "[How to use Library](https://github.com/SanjoSolutions/LuaLibrary#how-to-use)" for how to use this library.
