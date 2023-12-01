@@ -1,16 +1,13 @@
 local addOnName = 'Bags'
-local version = '2.0.2'
+local version = '2.0.5'
 
 if _G.Library then
   if not Library.isRegistered(addOnName, version) then
-    local Compatibility = Library.retrieve('Compatibility', '^2.0.0')
+    local Compatibility = Library.retrieve('Compatibility', '^2.0.2')
     local Set = Library.retrieve('Set', '^1.1.0')
 
     --- @class Bags
     local Bags = {}
-
-    local addOnName, AddOn = ...
-    local _ = {}
 
     function Bags.countItem(itemID)
       local count = 0
