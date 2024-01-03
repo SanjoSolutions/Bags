@@ -1,10 +1,10 @@
-local addOnName = 'Bags'
-local version = '2.0.5'
+local addOnName = "Bags"
+local version = "2.1.0"
 
 if _G.Library then
   if not Library.isRegistered(addOnName, version) then
-    local Compatibility = Library.retrieve('Compatibility', '^2.0.2')
-    local Set = Library.retrieve('Set', '^1.1.0')
+    local Compatibility = Library.retrieve("Compatibility", "^2.0.2")
+    local Set = Library.retrieve("Set", "^1.1.0")
 
     --- @class Bags
     local Bags = {}
@@ -12,9 +12,10 @@ if _G.Library then
     function Bags.countItem(itemID)
       local count = 0
 
-      for containerIndex = 0, NUM_BAG_SLOTS + 1 do
+      for containerIndex = 0, NUM_TOTAL_EQUIPPED_BAG_SLOTS do
         for slotIndex = 1, Compatibility.Container.receiveNumberOfSlotsOfContainer(containerIndex) do
-          local itemInfo = Compatibility.Container.retrieveItemInfo(containerIndex, slotIndex)
+          local itemInfo = Compatibility.Container.retrieveItemInfo(
+          containerIndex, slotIndex)
           if itemInfo and itemInfo.itemID == itemID then
             count = count + itemInfo.stackCount
           end
@@ -24,16 +25,33 @@ if _G.Library then
       return count
     end
 
-    function Bags.findItem(itemIDs)
-      if type(itemIDs) == 'number' then
-        itemIDs = { itemIDs }
+    --- @param selector number|number[]|fun(containerIndex: number, slotIndex: number): boolean
+    --- @return number|nil, number|nil
+    function Bags.findItem(selector)
+      local isMatch
+      local selectorType = type(selector)
+      if selectorType == "number" then
+        selector = { selector, }
+        isMatch = function(containerIndex, slotIndex)
+          local slotItemID = C_Container.GetContainerItemID(containerIndex,
+            slotIndex)
+          return selector == slotItemID
+        end
+      elseif selectorType == "table" then
+        isMatch = function(containerIndex, slotIndex)
+          local slotItemID = C_Container.GetContainerItemID(containerIndex,
+            slotIndex)
+          return Set.contains(selector, slotItemID)
+        end
+      elseif selectorType == "function" then
+        isMatch = selector
+      else
+        error("Invalid selector type: " .. selectorType)
       end
-      itemIDs = Set.create(itemIDs)
 
-      for containerIndex = 0, NUM_BAG_SLOTS + 1 do
+      for containerIndex = 0, NUM_TOTAL_EQUIPPED_BAG_SLOTS do
         for slotIndex = 1, Compatibility.Container.receiveNumberOfSlotsOfContainer(containerIndex) do
-          local slotItemID = C_Container.GetContainerItemID(containerIndex, slotIndex)
-          if Set.contains(itemIDs, slotItemID) then
+          if isMatch(containerIndex, slotIndex) then
             return containerIndex, slotIndex
           end
         end
@@ -43,9 +61,10 @@ if _G.Library then
     end
 
     function Bags.hasItem(itemID)
-      for containerIndex = 0, NUM_BAG_SLOTS + 1 do
+      for containerIndex = 0, NUM_TOTAL_EQUIPPED_BAG_SLOTS do
         for slotIndex = 1, Compatibility.Container.receiveNumberOfSlotsOfContainer(containerIndex) do
-          local slotItemID = C_Container.GetContainerItemID(containerIndex, slotIndex)
+          local slotItemID = C_Container.GetContainerItemID(containerIndex,
+            slotIndex)
           if slotItemID == itemID then
             return true
           end
@@ -58,7 +77,9 @@ if _G.Library then
     function Bags.determineNumberOfFreeSlots()
       local numberOfFreeSlots = 0
       for containerIndex = 0, NUM_BAG_SLOTS do
-        numberOfFreeSlots = numberOfFreeSlots + Compatibility.Container.receiveNumberOfFreeSlotsInContainer(containerIndex)
+        numberOfFreeSlots = numberOfFreeSlots +
+          Compatibility.Container.receiveNumberOfFreeSlotsInContainer(
+          containerIndex)
       end
       return numberOfFreeSlots
     end
@@ -74,5 +95,5 @@ if _G.Library then
     Library.register(addOnName, version, Bags)
   end
 else
-  error(addOnName .. ' requires Library. It seems absent.')
+  error(addOnName .. " requires Library. It seems absent.")
 end
